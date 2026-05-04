@@ -45,7 +45,7 @@ export function About() {
         <div className="relative">
           <div className="aspect-square rounded-2xl bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
             <img
-              src="https://plain-apac-prod-public.komododecks.com/202605/01/pWwuPzI0MQe0sKw37RMS/image.jpg"
+              src="/profile.jpg"
               alt="Aruna Kumari Padala"
               className="object-cover w-full h-full"
             />

@@ -104,10 +104,8 @@ export function Hero() {
               {/* Header with Buttons */}
               <div className="absolute top-6 right-6 z-10 flex gap-3">
                 <a
-                  href="https://plain-apac-prod-public.komododecks.com/202605/03/4Dj9MTM5CLXkY0KVMH65/image.jpg"
+                  href="/resume.jpg"
                   download="Aruna_Kumari_Padala_Resume.jpg"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all active:scale-95 flex items-center gap-2 px-5 font-bold text-sm"
                 >
                   <FiDownload size={18} />
@@ -124,7 +122,7 @@ export function Hero() {
               {/* Scrollable Image Area */}
               <div className="flex-1 overflow-auto p-4 sm:p-8 bg-slate-100 dark:bg-slate-950">
                 <img
-                  src="https://plain-apac-prod-public.komododecks.com/202605/03/4Dj9MTM5CLXkY0KVMH65/image.jpg"
+                  src="/resume.jpg"
                   alt="Aruna Kumari Padala Resume"
                   className="w-full h-auto rounded-lg shadow-xl mx-auto"
                 />
