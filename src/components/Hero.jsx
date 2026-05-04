@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/bits/Button";
 
+import { FiDownload, FiX } from "react-icons/fi";
+
 const roles = ["Frontend Developer", "UI/UX Designer", "Software Engineer", "React Specialist"];
 
 export function Hero() {
   const [activeRoleIndex, setActiveRoleIndex] = useState(0);
+  const [showResume, setShowResume] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,14 +26,6 @@ export function Hero() {
     }
   };
 
-  const scrollToProjects = () => {
-    const element = document.getElementById("projects");
-    if (element) {
-      const top = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-  };
-
   return (
     <section
       id="home"
@@ -41,7 +36,7 @@ export function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[120px]" />
         <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px]" />
       </div>
-      
+
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10 opacity-100">
         <div>
           <h2 className="text-blue-500 font-bold tracking-[0.2em] uppercase text-[10px] mb-6">
@@ -60,7 +55,7 @@ export function Hero() {
 
         <div className="h-12 mb-8">
           <AnimatePresence mode="wait">
-            <motion.p 
+            <motion.p
               key={activeRoleIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -77,14 +72,67 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <Button onClick={scrollToProjects} className="w-full sm:w-auto px-10 h-14 rounded-2xl text-lg shadow-xl shadow-blue-500/10">
-            View Portfolio
+          <Button
+            onClick={() => setShowResume(true)}
+            className="w-full sm:w-auto px-10 h-14 rounded-2xl text-lg shadow-xl shadow-blue-500/10"
+          >
+            Resume
           </Button>
           <Button variant="outline" onClick={scrollToContact} className="w-full sm:w-auto px-10 h-14 rounded-2xl text-lg border-slate-700 text-white hover:bg-slate-800">
             Let's Talk
           </Button>
         </div>
       </div>
+
+      {/* Resume Modal Overlay */}
+      <AnimatePresence>
+        {showResume && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowResume(false)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/90 backdrop-blur-xl"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full max-h-[90vh] bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl flex flex-col"
+            >
+              {/* Header with Buttons */}
+              <div className="absolute top-6 right-6 z-10 flex gap-3">
+                <a
+                  href="https://plain-apac-prod-public.komododecks.com/202605/03/4Dj9MTM5CLXkY0KVMH65/image.jpg"
+                  download="Aruna_Kumari_Padala_Resume.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-all active:scale-95 flex items-center gap-2 px-5 font-bold text-sm"
+                >
+                  <FiDownload size={18} />
+                  Download
+                </a>
+                <button
+                  onClick={() => setShowResume(false)}
+                  className="p-3 bg-black/20 hover:bg-black/40 backdrop-blur-xl rounded-full text-white transition-all active:scale-95"
+                >
+                  <FiX size={24} />
+                </button>
+              </div>
+
+              {/* Scrollable Image Area */}
+              <div className="flex-1 overflow-auto p-4 sm:p-8 bg-slate-100 dark:bg-slate-950">
+                <img
+                  src="https://plain-apac-prod-public.komododecks.com/202605/03/4Dj9MTM5CLXkY0KVMH65/image.jpg"
+                  alt="Aruna Kumari Padala Resume"
+                  className="w-full h-auto rounded-lg shadow-xl mx-auto"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
